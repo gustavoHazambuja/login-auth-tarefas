@@ -33,12 +33,17 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nome;
     private String email;
     private String senha;
 
     @Enumerated(EnumType.STRING)
     private tipoUsuario role;
+
+    public Usuario(String email, String senha, tipoUsuario role){
+        this.email = email;
+        this.senha = senha;
+        this.role = role;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -55,4 +60,7 @@ public class Usuario implements UserDetails {
     public String getUsername() {
         return email;
     }
+
+
+    
 }
