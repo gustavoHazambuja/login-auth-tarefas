@@ -39,9 +39,18 @@ public class TarefaService {
         return true;
     }
 
+    public TarefaDTO atualizarEstadoTarefa(Long id, TarefaDTO dto){
+        Tarefa tarefaEncontrada = tarefaRepository.findById(id).get();
+        if(tarefaEncontrada == null){
+            throw new RuntimeException("");
+        }
 
+        tarefaEncontrada.setNome(dto.getNome());
+        tarefaEncontrada.setConcluida(dto.isConcluida());
 
-
+        Tarefa tarefaAtualizada = tarefaRepository.save(tarefaEncontrada);
+        return TarefaDTO.fromModel(tarefaAtualizada);
+    }
 
 
     private Tarefa toModel(TarefaDTO dto){
