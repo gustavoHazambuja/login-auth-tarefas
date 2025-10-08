@@ -20,10 +20,11 @@ public class TarefaService {
         return tarefaRepository.existsById(id);
     }
 
-    public TarefaDTO criarTarefa(TarefaDTO dto){
+    public boolean criarTarefa(TarefaDTO dto){
         Tarefa tarefa = toModel(dto);
-        Tarefa result = tarefaRepository.save(tarefa);
-        return TarefaDTO.fromModel(result);
+        tarefaRepository.save(tarefa);
+
+        return true;
     }
 
     public Page<TarefaDTO> listarTarefas(Pageable pageable){
@@ -39,14 +40,14 @@ public class TarefaService {
         return true;
     }
 
-    public TarefaDTO atualizarEstadoTarefa(Long id, TarefaDTO dto){
+    public TarefaDTO atualizarTarefa(Long id, TarefaDTO dto){
         Tarefa tarefaEncontrada = tarefaRepository.findById(id).get();
         if(tarefaEncontrada == null){
             throw new RuntimeException("");
         }
 
         tarefaEncontrada.setNome(dto.getNome());
-        tarefaEncontrada.setConcluida(dto.isConcluida());
+        tarefaEncontrada.setStatus(dto.getStatus());
 
         Tarefa tarefaAtualizada = tarefaRepository.save(tarefaEncontrada);
         return TarefaDTO.fromModel(tarefaAtualizada);
@@ -56,7 +57,7 @@ public class TarefaService {
     private Tarefa toModel(TarefaDTO dto){
         return new Tarefa(
             dto.getNome(),
-            dto.isConcluida()
+            dto.getStatus()
         );
     }
 }
