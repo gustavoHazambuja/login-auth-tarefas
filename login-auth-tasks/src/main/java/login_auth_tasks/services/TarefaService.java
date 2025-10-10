@@ -43,7 +43,7 @@ public class TarefaService {
 
     public TarefaDTO atualizarTarefa(Long id, TarefaDTO dto){
         Tarefa tarefaEncontrada = tarefaRepository.findById(id)
-            .orElseThrow(() -> new TarefaNotFoundExcepton("Tarefa com ID " + id + " não encontrada"));
+            .orElseThrow(() -> new TarefaNotFoundExcepton("Tarefa com ID " + id + " não encontrada."));
 
         tarefaEncontrada.setNome(dto.getNome());
         tarefaEncontrada.setStatus(dto.getStatus());
