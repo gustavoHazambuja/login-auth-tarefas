@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,7 @@ public class TarefaController {
 
     @PostMapping(value = "/criarTarefa")
     public ResponseEntity<?> criarTarefa(@RequestBody @Valid TarefaDTO dto){
+        
         boolean resposta = tarefaService.criarTarefa(dto);
 
         if(resposta){
@@ -56,7 +58,7 @@ public class TarefaController {
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
-    @GetMapping(value = "/deletarTarefa/{id}")
+    @DeleteMapping(value = "/deletarTarefa/{id}")
     public boolean deletarTarefa(@PathVariable Long id){
         return tarefaService.deletarTarefa(id);
     }

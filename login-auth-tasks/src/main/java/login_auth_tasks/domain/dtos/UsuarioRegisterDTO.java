@@ -2,6 +2,7 @@ package login_auth_tasks.domain.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import login_auth_tasks.domain.entities.Usuario;
 import login_auth_tasks.domain.enums.tipoUsuario;
@@ -21,10 +22,10 @@ public class UsuarioRegisterDTO {
     private String email;
 
     @NotBlank(message = "A senha é obrigatória")
-    @Size(min = 6)
+    @Size(min = 6, message = "Mínino de 6 caracteres")
     private String senha;
 
-    @NotBlank
+    @NotNull(message = "O tipo de usuário é obrigatório")
     private tipoUsuario role;
 
 

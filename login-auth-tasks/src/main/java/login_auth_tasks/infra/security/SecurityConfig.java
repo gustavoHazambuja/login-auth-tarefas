@@ -16,33 +16,31 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
-    private CustomUserDetailsService userDetailsService;
+
     private SecurityFilter securityFilter;
 
 
-    public SecurityConfig(CustomUserDetailsService userDetailsService, SecurityFilter securityFilter){
-        this.userDetailsService = userDetailsService;
+    public SecurityConfig(SecurityFilter securityFilter){
         this.securityFilter = securityFilter;
     }
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+        return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                    .requestMatchers(HttpMethod.GET,"/tarefas/validatarefa/{id}").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST,"/user/register").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/user/login").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/tarefas/validaTarefa/{id}").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/tarefas/deletarTarefa/{id}").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.PUT,"/tarefas/atualizarTarefa/{id}").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 
                 )
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
-                return http.build();
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
        @Bean

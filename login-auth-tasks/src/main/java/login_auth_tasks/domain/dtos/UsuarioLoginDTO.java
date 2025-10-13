@@ -2,7 +2,9 @@ package login_auth_tasks.domain.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
 
+@Getter
 public class UsuarioLoginDTO {
     
     @NotBlank(message = "O email é obrigatório")

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import login_auth_tasks.domain.dtos.TarefaDTO;
 import login_auth_tasks.domain.entities.Tarefa;
-import login_auth_tasks.exceptions.TarefaNotFoundExcepton;
+import login_auth_tasks.exceptions.TarefaNotFoundException;
 import login_auth_tasks.repositories.TarefaRepository;
 
 @Service
@@ -23,8 +23,9 @@ public class TarefaService {
 
     public boolean criarTarefa(TarefaDTO dto){
         Tarefa tarefa = toModel(dto);
-        tarefaRepository.save(tarefa);
+        Tarefa tarefaSalva = tarefaRepository.save(tarefa);
 
+        TarefaDTO.fromModel(tarefaSalva);
         return true;
     }
 
@@ -43,7 +44,7 @@ public class TarefaService {
 
     public TarefaDTO atualizarTarefa(Long id, TarefaDTO dto){
         Tarefa tarefaEncontrada = tarefaRepository.findById(id)
-            .orElseThrow(() -> new TarefaNotFoundExcepton("Tarefa com ID " + id + " não encontrada."));
+            .orElseThrow(() -> new TarefaNotFoundException("Tarefa com ID " + id + " não encontrada."));
 
         tarefaEncontrada.setNome(dto.getNome());
         tarefaEncontrada.setStatus(dto.getStatus());

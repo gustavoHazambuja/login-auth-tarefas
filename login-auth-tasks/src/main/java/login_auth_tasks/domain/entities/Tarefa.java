@@ -1,6 +1,8 @@
 package login_auth_tasks.domain.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +26,8 @@ public class Tarefa {
     private Long id;
 
     private String nome;
+
+    @Enumerated(EnumType.STRING)
     private EstadoTarefa status;
 
     public Tarefa(String nome, EstadoTarefa status){

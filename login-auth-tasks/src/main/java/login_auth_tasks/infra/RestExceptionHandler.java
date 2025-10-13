@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import login_auth_tasks.exceptions.TarefaNotFoundExcepton;
-import login_auth_tasks.exceptions.UserNotFound;
+import login_auth_tasks.exceptions.TarefaNotFoundException;
+import login_auth_tasks.exceptions.UserNotFoundException;
 
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler{
     
 
-    @ExceptionHandler(TarefaNotFoundExcepton.class)
-    private ResponseEntity<String> tarefaNotFound(TarefaNotFoundExcepton exception){
+    @ExceptionHandler(TarefaNotFoundException.class)
+    private ResponseEntity<String> tarefaNotFound(TarefaNotFoundException exception){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
-    @ExceptionHandler(UserNotFound.class)
-    private ResponseEntity<String> userNotFound(UserNotFound exception){
+    @ExceptionHandler(UserNotFoundException.class)
+    private ResponseEntity<String> userNotFound(UserNotFoundException exception){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
