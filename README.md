@@ -6,6 +6,11 @@
 
 Esse projeto é uma aplicação backend, onde é realizado um CRUD de gerenciamento de tarefas com autorização de usuários com Spring Security.
 
+## Código
+![](https://github.com/gustavoHazambuja/Images/blob/main/login-auth-tasks/C%C3%B3digo.png)
+
+## API
+![](https://github.com/gustavoHazambuja/Images/blob/main/login-auth-tasks/API.png)
 
 # Tecnologias utilizadas
 ## Back end
