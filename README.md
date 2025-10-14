@@ -14,6 +14,7 @@ Esse projeto é uma aplicação backend, onde é realizado um CRUD de gerenciame
 - JPA / Hibernate
 - Maven
 - Spring Security
+- Auth0
 
 ```
 
